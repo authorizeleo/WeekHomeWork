@@ -83,9 +83,11 @@ top:25px
 @media screen and (max-width: 600px){
     .Hamberger{
         display: block;
+        transition: 0.8s;
     }
     .nav{
         overflow: hidden;
+        transition: 1s;
     }
     .nav.open{
         overflow: visible;
