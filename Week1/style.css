@@ -90,6 +90,7 @@ top:25px
         transition: 1s;
     }
     .nav.open{
+        transition: 1s;
         overflow: visible;
     }
     .menu > ul{
