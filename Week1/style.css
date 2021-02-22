@@ -158,7 +158,7 @@ top:25px
 }
 
 .mainItem > img:hover{
-    opacity: 0.75;
+    filter: blur(10px);
 }
 
 .mainItem > h1{
