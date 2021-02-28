@@ -114,20 +114,20 @@ top:25px
     width:100%;
     height:300px;
     background-color: lightskyblue;
+    position: relative;
 }
 
 
-.product > .item {
-    height:300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.product > .item > h1{
+
+.product  > h1{
     font-size: 2em;
     color:darkblue;
     text-align: center;
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
 }
 /*main區*/
 .main{
