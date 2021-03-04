@@ -70,3 +70,27 @@ def twoSum(nums, target):
 
 result=twoSum([2, 11, 7, 15], 9)
 print(result) # show [0, 2] because nums[0]+nums[2] is 9
+
+
+# 第五題
+def maxZeros(nums):
+    a = 0
+    f = []
+    for i in nums:
+        if i == 0:
+           a += 1
+           f.append(a)  
+        elif i  == 1 :
+            f.append(a)
+            a = 0
+            
+                
+    print(max(f))
+
+  
+# 請用你的程式補完這個函式的區塊
+maxZeros([0, 1, 0, 0]) # 得到 2
+maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]) # 得到 4
+maxZeros([1, 1, 1, 1, 1]) # 得到 0
+maxZeros([1, 1, 1, 1, 0]) # 得到 1
+maxZeros([1, 1, 1, 1, 0, 1, 0, 1, 1]) # 得到 1
