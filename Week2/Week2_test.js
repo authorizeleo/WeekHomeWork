@@ -89,4 +89,23 @@ function twoSum(nums, target){
 result=twoSum([2, 11, 7, 15], 9)
 console.log(result) // show [0, 2] because nums[0]+nums[2] is 9
 
+function maxZeros(nums){
+    let x = 0
+    let y = []
+    for (let z= 0 ; z < nums.length ; z++){
+        if (nums[z] == 0){
+            x += 1 
+            y.push(x)
+        }else if(nums[z] == 1){
+            x = 0
+            y.push(x)
+        } 
+    }
+    console.log(Math.max(...y))
+// 請用你的程式補完這個函式的區塊
+}
+maxZeros([0, 1, 0, 0]) // 得到 2
+maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]) // 得到 4
+maxZeros([1, 1, 1, 1, 1]) // 得到 0
+
 
