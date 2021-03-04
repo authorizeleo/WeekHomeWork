@@ -89,6 +89,8 @@ function twoSum(nums, target){
 result=twoSum([2, 11, 7, 15], 9)
 console.log(result) // show [0, 2] because nums[0]+nums[2] is 9
 
+
+ // 第五題
 function maxZeros(nums){
     let x = 0
     let y = []
