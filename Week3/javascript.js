@@ -1,6 +1,6 @@
 const Hamburger = document.querySelector(".Hamberger")
 const nav = document.querySelector(".nav")
-
+const button = document.getElementById("loadbutton")
 Hamburger.addEventListener("click",()=>{
     Hamburger.classList.toggle("open")
     nav.classList.toggle("open")
@@ -25,15 +25,21 @@ desk.onload = function(){
         first = IgSrc.split(".jpg")[0]
         show(dist, first)
     }
-    const button = document.getElementById("loadbutton")
-    button.addEventListener("click", CK)
-    function CK(){
-        for(let y = 8 ; y < 16 ; y++){
+    function img(g){
+        for(let y = g; y < g *2 ; y++ ){
             dist = data["result"]['results'][y]["stitle"]
             IgSrc = data["result"]['results'][y]["file"]
             first = IgSrc.split(".jpg")[0]
             show(dist, first)
-    }}
+        }
+    }
+    
+    let g = 0
+    button.addEventListener("click", CK)
+    function CK(){ 
+       g += 8 
+       img(g)  
+    }
 }
 
 
