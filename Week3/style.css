@@ -149,7 +149,7 @@ top:25px
     margin-left:2%;
     text-align: center;
     font-size: 0px;
-    margin-top:50px;
+    margin-top:80px;
     
     
 }
@@ -179,13 +179,23 @@ top:25px
 }
 
 button {
-    border: none;
+    border: 1px solid lightpink;
+    padding: 10px;
     outline: none;
-    background-color: aqua;
+    background-color: lightpink;
     font-family: 微軟正黑體;
     cursor: pointer;
     position: absolute;
-    bottom:0px
+    border-radius: 0 50%;
+    bottom:5px;
+    color:lightseagreen;
+    font-weight:900px;
+    transition: 1s;
+}
+
+button:hover{
+    transform: scale(1.1);
+    transform: translateY(-10%);
 }
 
 @media (min-width: 601px) and (max-width: 1200px){
