@@ -51,6 +51,7 @@ function show(data,src){
     cell.className = 'mainItem'
     cell.textContent = "hello world;"
     imgBox.src = src + ".jpg"
+    imgBox.alt ="死圖"
     const list = document.getElementById("mainAll")
     list.appendChild(cell)
     cell.appendChild(imgBox)
