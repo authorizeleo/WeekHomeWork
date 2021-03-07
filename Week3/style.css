@@ -149,12 +149,14 @@ top:25px
     margin-left:2%;
     text-align: center;
     font-size: 0px;
-    margin-top:10px;
+    margin-top:50px;
+    
     
 }
 
 .mainItem > img{
     width:100%; 
+    height:100%;
     transition: 1s;
 }
 
@@ -168,15 +170,22 @@ top:25px
 }
 
 .loadingbutton{
+    width:100%;
+    height:80px;
     display:flex;
     justify-content: center;
+    clear: both;
+    position: relative;
 }
 
 button {
     border: none;
+    outline: none;
     background-color: aqua;
     font-family: 微軟正黑體;
     cursor: pointer;
+    position: absolute;
+    bottom:0px
 }
 
 @media (min-width: 601px) and (max-width: 1200px){
