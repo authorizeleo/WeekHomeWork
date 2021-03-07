@@ -26,7 +26,7 @@ desk.onload = function(){
         show(dist, first)
     }
     function img(g){
-        for(let y = g; y < g *2 ; y++ ){
+        for(let y = g; y < g + 8 ; y++ ){
             dist = data["result"]['results'][y]["stitle"]
             IgSrc = data["result"]['results'][y]["file"]
             first = IgSrc.split(".jpg")[0]
