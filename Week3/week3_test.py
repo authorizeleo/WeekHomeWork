@@ -9,7 +9,7 @@ try:
         # print(Attr)
         with open("data.txt" , "w" , encoding="utf-8") as w:
             for att in Attr:
-                sc = att["file"].split(".jpg")
-                w.write(att["stitle"]+ ',' + att["longitude"] + ',' + att["latitude"] +','+ sc[0] +'.jpg'  +'\n')
+                sc = att["file"].split("http")
+                w.write(att["stitle"]+ ',' + att["longitude"] + ',' + att["latitude"] +',http'+ sc[1]  +'\n')
 except Exception as e:
         print(" Hello world ^___^")
