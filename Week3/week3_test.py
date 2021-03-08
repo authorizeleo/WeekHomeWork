@@ -1,6 +1,6 @@
 import urllib.request as request
 import json
-src="https://data.taipei/api/v1/dataset/36847f3f-deff-4183-a5bb-800737591de5?scope=resourceAquire"
+src="https://padax.github.io/taipei-day-trip-resources/taipei-attractions.json"
 try:
     with request.urlopen(src) as f:
         # res = f.read().decode('utf-8')
