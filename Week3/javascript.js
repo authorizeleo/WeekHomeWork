@@ -1,6 +1,7 @@
 const Hamburger = document.querySelector(".Hamberger")
 const nav = document.querySelector(".nav")
 const button = document.getElementById("loadbutton")
+
 Hamburger.addEventListener("click",()=>{
     Hamburger.classList.toggle("open")
     nav.classList.toggle("open")
@@ -9,28 +10,28 @@ Hamburger.addEventListener("click",()=>{
 let proxy = "https://cors-anywhere.herokuapp.com/";
 let api = "https://data.taipei/api/v1/dataset/36847f3f-deff-4183-a5bb-800737591de5?scope=resourceAquire"
 
-let desk = new XMLHttpRequest()
+let connect = new XMLHttpRequest()
 
-desk.open("GET", proxy + api, true)
-desk.send()
-desk.onload = function(){
-
+connect.open("GET", proxy + api, true)
+connect.send()
+connect.onload = function(){
     let data = JSON.parse(this.responseText);
-    console.log(data["result"]['results'])
-    let dist ;
+    let Attractions ;
     let IgSrc;
+
     for(let x = 0 ; x < 8 ; x ++){
-        dist = data["result"]['results'][x]["stitle"]
+        Attractions = data["result"]['results'][x]["stitle"]
         IgSrc = data["result"]['results'][x]["file"]
         first = IgSrc.split(".jpg")[0]
-        show(dist, first)
+        show(Attractions, first)
     }
+
     function img(g){
         for(let y = g; y < g + 8 ; y++ ){
-            dist = data["result"]['results'][y]["stitle"]
+            Attractions = data["result"]['results'][y]["stitle"]
             IgSrc = data["result"]['results'][y]["file"]
             first = IgSrc.split(".jpg")[0]
-            show(dist, first)
+            show(Attractions, first)
         }
     }
     
