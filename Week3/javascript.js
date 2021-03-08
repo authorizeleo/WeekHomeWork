@@ -49,7 +49,6 @@ function show(data,src){
     let h1 = document.createElement('h1')
     h1.textContent = data
     cell.className = 'mainItem'
-    cell.textContent = "hello world;"
     imgBox.src = src + ".jpg"
     imgBox.alt ="死圖"
     const list = document.getElementById("mainAll")
