@@ -16,7 +16,7 @@ connect.open("GET",  api, true)
 connect.send()
 connect.onload = function(){
     let data = JSON.parse(this.responseText);
-    console.log(data["result"]['results'])
+    // console.log(data["result"]['results'])
     let Attractions ;
     let IgSrc;
 
@@ -51,6 +51,9 @@ function show(data,src){
     let imgBox = document.createElement('img') 
     let h1 = document.createElement('h1')
     h1.textContent = data
+    if (data.length > 13) {
+        h1.style.fontSize = "15px"
+    }
     cell.className = 'mainItem'
     imgBox.src =   "http" + src  
     imgBox.alt ="死圖"

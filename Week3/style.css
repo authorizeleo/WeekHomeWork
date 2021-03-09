@@ -149,7 +149,9 @@ top:25px
     margin-left:2%;
     text-align: center;
     font-size: 0px;
-    margin-top:80px;
+    margin-top:50px;
+    height:200px;
+    background-color: lightblue;
     
     
 }
@@ -166,7 +168,8 @@ top:25px
 
 .mainItem > h1{
     color:darkblue;
-    background-color: lightblue;
+    height: 30px;
+    margin-top: 10px;
 }
 
 .loadingbutton{
