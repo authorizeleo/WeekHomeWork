@@ -10,19 +10,21 @@ app.config["SECRET_KEY"] = "123"
 def index():
     number = session.get('number')
     if number:
-        return redirect("/member/")
+        return redirect(url_for("member"))
     else:
         return render_template("index.html")
 
-@app.route('/signin', methods=["POST"])
+@app.route('/signin', methods=["POST","GET"])
 def signin():
-    numbers = request.form["AccountNumber"]
-    password = request.form["password"]
-    if numbers == "test" and password == "test":
-        session["number"] = "Hello world"
-        return redirect("/member/")   
-    else:
-        return redirect("/error/")
+    req = request.form
+    numbers = req.get("AccountNumber")
+    password = req.get("password")
+    if request.method == "POST":
+        if numbers == "test" and password == "test":
+            session["number"] = "Hello world"
+            return redirect(url_for("member"))   
+        else:
+            return redirect("/error/")
 
 @app.route('/member/')
 def member():
