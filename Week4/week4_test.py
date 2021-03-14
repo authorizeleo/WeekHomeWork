@@ -27,10 +27,10 @@ def signin():
 @app.route('/member/')
 def member():
     number = session.get('number')
-    if number is False: 
-        return redirect('/')
+    if number: 
+        return render_template("member.html")
     else :
-       return render_template("member.html")
+       return redirect('/')
 
 
 @app.route('/error/')
