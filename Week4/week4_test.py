@@ -10,7 +10,7 @@ app.config["SECRET_KEY"] = "123"
 def index():
     number = session.get('number')
     if number:
-        return render_template("member.html")
+        return redirect("/member/")
     else:
         return render_template("index.html")
 
@@ -20,22 +20,24 @@ def signin():
     password = request.form["password"]
     if numbers == "test" and password == "test":
         session["number"] = "Hello world"
-        return render_template("member.html")   
+        return redirect("/member/")   
     else:
-        return render_template("error.html")
+        return redirect("/error/")
 
-@app.route('/member')
+@app.route('/member/')
 def member():
     number = session.get('number')
-    if number is True: 
-        return render_template("member.html")
-    else :
+    if number is False: 
         return redirect('/')
+    else :
+       return render_template("member.html")
 
 
+@app.route('/error/')
+def error():
+    return render_template("error.html")
 
-
-@app.route('/signout')
+@app.route('/signout/')
 def signout():
     session.pop("number", None)
     return redirect("/")
