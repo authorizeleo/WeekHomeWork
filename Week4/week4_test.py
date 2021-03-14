@@ -3,14 +3,14 @@ from flask import render_template
 from markupsafe import escape
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "123"
+app.secret_key = "123456"
 
 
 @app.route('/')
 def index():
     number = session.get('number')
     if number:
-        return redirect(url_for("member"))
+        return redirect("/member/")
     else:
         return render_template("index.html")
 
@@ -22,7 +22,7 @@ def signin():
     if request.method == "POST":
         if numbers == "test" and password == "test":
             session["number"] = "Hello world"
-            return redirect(url_for("member"))   
+            return redirect("/member/")  
         else:
             return redirect("/error/")
 
@@ -32,7 +32,8 @@ def member():
     if number: 
         return render_template("member.html")
     else :
-       return redirect('/')
+        flash("拜託你，可以好好登入嗎?")
+        return redirect('/')
 
 
 @app.route('/error/')
