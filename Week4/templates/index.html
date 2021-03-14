@@ -34,6 +34,13 @@
             margin-left:40%;
             margin-top:20px;
         }
+        .bye{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            color: red;
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +60,17 @@
         </label>
         <input class="btn" type="submit" value="登入">
     </form>
+
+    
+</div>
+<div class="bye">
+{% with messages = get_flashed_messages() %}  
+{% if messages %}  
+        {% for message in messages %}  
+            <p>{{ message }}</p>  
+        {% endfor %}  
+{% endif %}  
+{% endwith %}
 </div>
 </body>
 </html>
