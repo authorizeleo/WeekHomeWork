@@ -12,7 +12,6 @@ def index():
     if number:
         return redirect("/member/")
     else:
-        session.pop("number", None)
         return render_template("index.html")
 
 @app.route('/signin', methods=["POST","GET"])
