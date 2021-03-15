@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, request, flash, url_for
+from flask import Flask, session, redirect, request, flash
 from flask import render_template
 from markupsafe import escape
 
