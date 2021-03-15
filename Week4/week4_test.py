@@ -38,7 +38,12 @@ def member():
 
 @app.route('/error/')
 def error():
-    return render_template("error.html")
+    number = session.get('number')
+    if number:
+        flash("千萬不要這樣子玩!")
+        return redirect("/member/")
+    else:
+        return render_template("error.html")
 
 @app.route('/signout/')
 def signout():
