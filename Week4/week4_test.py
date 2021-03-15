@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, request, flash
 from flask import render_template
-from markupsafe import escape
+
 
 app = Flask(__name__)
 app.secret_key = "123456"
