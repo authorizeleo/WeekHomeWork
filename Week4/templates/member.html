@@ -29,6 +29,13 @@
             font-size: 40px;
             margin-top: 50px;
         }
+        .bye{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            color: red;
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
@@ -39,6 +46,14 @@
         <h2>恭喜你，成功登入系統</h2>
         <a href="/signout">登出系統</a>
     </div>
-
+    <div class="bye">
+        {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+                {% for message in messages %}  
+                    <p>{{ message }}</p>  
+                {% endfor %}  
+        {% endif %}  
+        {% endwith %}
+    </div>
 </body>
 </html>
