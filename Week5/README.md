@@ -7,7 +7,9 @@ password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 使用 SELECT 指令取得所有在 user 資料表中的使用者資料。
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.2.png)
 
+
 使用 SELECT 指令取得 user 資料表中總共有幾筆資料。
+
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.3.png)
 
 使用 SELECT 指令取得所有在 user 資料表中的使用者資料，並按照 time 欄位，由近
