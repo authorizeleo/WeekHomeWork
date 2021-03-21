@@ -37,3 +37,15 @@ password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 使用 DELETE 指令刪除所有在 user 資料表中的資料。
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.9.png)
 
+在資料庫中，建立新資料表，取名字為message。資料表中必須包含以下欄位設定：
+
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.1.png)
+
+使用 SELECT 搭配 JOIN 的語法，取得所有留言，資料中須包含留言會員的姓名。
+
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.2.png)
+
+使用 SELECT 搭配 JOIN 的語法，取得 user 資料表中欄位 username 是 ply 的所有留
+言，資料中須包含留言會員的姓名。
+
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.3.png)
