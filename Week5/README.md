@@ -43,9 +43,9 @@ password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 
 使用 SELECT 搭配 JOIN 的語法，取得所有留言，資料中須包含留言會員的姓名。
 
-![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.2.png)
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.3.png)
 
 使用 SELECT 搭配 JOIN 的語法，取得 user 資料表中欄位 username 是 ply 的所有留
 言，資料中須包含留言會員的姓名。
 
-![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.3.png)
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work4pic/4.4.png)
