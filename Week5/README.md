@@ -4,6 +4,7 @@ password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.1.png)
 
 新增一筆 預設 值 now()
+
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.10.png)
 
 
