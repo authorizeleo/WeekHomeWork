@@ -17,7 +17,7 @@ password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.3.png)
 
 使用 SELECT 指令取得所有在 user 資料表中的使用者資料，並按照 time 欄位，由近
-到遠排序。
+到遠排序。(where 避免自己手打時間有誤 超過今日)
 
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.4.png)
 
