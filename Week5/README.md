@@ -3,6 +3,9 @@
 password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.1.png)
 
+新增一筆 預設 值 now()
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.10.png)
+
 
 使用 SELECT 指令取得所有在 user 資料表中的使用者資料。
 ![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.2.png)
@@ -20,7 +23,7 @@ password 欄位必須是 ply。接著繼續新增至少 4 筆隨意的資料。
 使用 SELECT 指令取得 user 資料表中第 2 ~ 4 共三筆資料，並按照 time 欄位，由近
 到遠排序。
 
-![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.5.png)
+![image](https://github.com/authorizeleo/WeekHomeWork/blob/main/Week5/work3pic/3.11.png)
 
 使用 SELECT 指令取得欄位 username 是 ply 的使用者資料。
 
