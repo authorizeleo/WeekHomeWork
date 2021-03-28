@@ -1,2 +1,2 @@
-SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:841220@127.0.0.1:3306/website"
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://帳號:密碼@127.0.0.1:3306/資料庫名稱"
 SQLALCHEMY_TRACK_MODIFICATIONS = "False"
