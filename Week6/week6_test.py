@@ -78,7 +78,7 @@ def member():
                 flash('密碼不得為空')
                 return redirect('/member/')
             else :
-                flash('密碼兩者不一確')
+                flash('密碼兩者不一致')
                 return redirect('/member/')
         else:
             return render_template("member.html" , data=name)
