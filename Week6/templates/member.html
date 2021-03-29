@@ -44,7 +44,18 @@
     </div>
     <div>
         <h2>恭喜{{data}}，成功登入系統</h2>
+        <form action="/member" method="post">
+            更新資料<br>
+            <label for="Editpassword">
+            密碼 :  <input type="password" name="EditPassword">  
+            </label><br>
+            <label for="again">
+            再輸入一次密碼 :  <input type="password" name="again">  
+            </label><br>
+            <input type="submit" value="送出">
+        </form>
         <a href="/signout">登出系統</a>
+        
     </div>
     <div class="bye">
         {% with messages = get_flashed_messages() %}  
