@@ -69,12 +69,12 @@ def member():
             EditPassword = request.form['EditPassword']
             again = request.form['again']
             EditMember = User.query.filter_by(id=id).first()
-            if EditPassword == again and EditPassword != None:
+            if EditPassword == again and EditPassword != "":
                 EditMember.password = EditPassword
                 db.session.commit()
                 flash('密碼修改完成')
                 return redirect('/member/')
-            elif (EditPassword == None and again == None):
+            elif (EditPassword == "" or again == ""):
                 flash('密碼不得為空')
                 return redirect('/member/')
             else :
