@@ -24,11 +24,15 @@ def index():
         registerusername = request.form['username']
         registerPassword = request.form['registerPassword']
         Check = User.query.filter_by(username= registerusername).first()
-        if  Check is not None and registerusername == Check.username  :
-            return redirect('/loser')
+        if name != "" and  registerPassword != "" and registerusername != "":   
+            if  Check is not None and registerusername == Check.username  :
+                return redirect('/loser')
+            else:
+                create(name, registerusername, registerPassword)
+                flash("註冊成功!")
+                return redirect('/')
         else:
-            create(name, registerusername, registerPassword)
-            flash("註冊成功!")
+            flash("欄位不得為空!")
             return redirect('/')
             
     name = session.get('name')
@@ -65,10 +69,13 @@ def member():
             EditPassword = request.form['EditPassword']
             again = request.form['again']
             EditMember = User.query.filter_by(id=id).first()
-            if EditPassword == again:
+            if EditPassword == again and EditPassword != None:
                 EditMember.password = EditPassword
                 db.session.commit()
                 flash('密碼修改完成')
+                return redirect('/member/')
+            elif (EditPassword == None and again == None):
+                flash('密碼不得為空')
                 return redirect('/member/')
             else :
                 flash('密碼兩者不一確')
