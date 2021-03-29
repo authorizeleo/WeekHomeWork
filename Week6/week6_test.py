@@ -21,7 +21,7 @@ class User(db.Model):
 def index():
     if request.method == 'POST':
         name = request.form['name']
-        registerusername = str(request.form['username'])
+        registerusername = request.form['username']
         registerPassword = request.form['registerPassword']
         Check = User.query.filter_by(username= registerusername).first()
         if  Check is not None and registerusername == Check.username  :
@@ -31,8 +31,8 @@ def index():
             flash("註冊成功!")
             return redirect('/')
             
-    number = session.get('number')
-    if number:
+    name = session.get('name')
+    if name:
         return redirect("/member/")
     else:
         return render_template("index.html")
@@ -40,36 +40,52 @@ def index():
 @app.route('/signin', methods=["POST","GET"])
 def signin():
     req = request.form
-    numbers = str(req.get("AccountNumber"))
+    numbers = req.get("AccountNumber")
     password = req.get("password")
     if request.method == "POST":
         signinCheck = User.query.filter_by(username= numbers).first()
         if signinCheck is not None and numbers == signinCheck.username and password == signinCheck.password:
-            session["number"] = "Hello world"
-            return render_template("member.html",data=signinCheck.name)  
+            session["name"] = signinCheck.name
+            session['id'] = signinCheck.id
+            return  redirect("/member/") 
         else:
-            message = request.args.get("message","帳號或密碼輸入錯誤")
-            return redirect(url_for("error", message=message))
-    number = session.get('number')
-    if number:
+            return redirect(url_for("error", message="帳號或密碼輸入錯誤"))
+    name = session.get('name')
+    if name:
         return redirect('/member/')
     else:
         return '<h1 style="color:lightpink">錯誤操作<h1> <br> <a href="/">返回首頁</a>'
 
-@app.route('/member/')
+@app.route('/member/' , methods=['GET','POST'])
 def member():
-    number = session.get('number')
-    if number: 
-        return render_template("member.html")
+    name = session.get('name')
+    id = session.get('id')
+    if name: 
+        if request.method == 'POST':
+            EditPassword = request.form['EditPassword']
+            again = request.form['again']
+            EditMember = User.query.filter_by(id=id).first()
+            if EditPassword == again:
+                EditMember.password = EditPassword
+                db.session.commit()
+                flash('密碼修改完成')
+                return redirect('/member/')
+            else :
+                flash('密碼兩者不一確')
+                return redirect('/member/')
+        else:
+            return render_template("member.html" , data=name)
     else :
         flash("拜託你，可以好好登入嗎?")
         return redirect('/')
 
 
+
+
 @app.route('/error/')
 def error():
-    number = session.get('number')
-    if number:
+    name = session.get('name')
+    if name:
         flash("千萬不要這樣子玩!")
         return redirect("/member/")
     else:
@@ -78,7 +94,8 @@ def error():
 
 @app.route('/signout/')
 def signout():
-    session.pop("number", None)
+    session.pop("name", None)
+    session.pop("id", None)
     return redirect("/")
 
 @app.route('/loser')
