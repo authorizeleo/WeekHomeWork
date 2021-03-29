@@ -17,7 +17,7 @@
             font-size: 40px;
         }
 
-        .register,.login{
+        .register{
             margin-top: 20px;
             display: flex;
             justify-content: center;
@@ -41,6 +41,17 @@
             color: red;
             font-size: 40px;
         }
+        .login{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        h2{
+            text-align: center;
+        }
+
+
     </style>
 </head>
 <body>
@@ -67,6 +78,7 @@
 
 <div class="login">
     <form action="/signin" method="POST">
+        <h2>登入系統</h2>
         <label for="AccountNumber">
             帳號:<input type="text" name="AccountNumber" id="AccountNumber">
         </label>
