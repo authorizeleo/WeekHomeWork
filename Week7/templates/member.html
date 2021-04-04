@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歡迎光臨，這是會員頁</title>
+    <style>
+        .hello{
+            color: aliceblue;
+            margin-bottom: 20px;
+            background-color: darkblue;
+        }
+        div{
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+        a{
+            display: block
+        }
+        h2{
+            margin-bottom: 20px;
+        }
+        p{
+            display: flex;
+            justify-content: center;
+            color:red;
+            font-size: 40px;
+            margin-top: 50px;
+        }
+        .bye{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            color: red;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hello">
+        <h1>歡迎光臨，這是會員頁</h1>
+    </div>
+    <div>
+        <h2>恭喜{{data}}，成功登入系統</h2>
+        <br/>
+        <form  >
+            <h2>查詢會員姓名</h2>
+            <label for="searchUsername">
+              <input type="text" name="searchUsername" id="searchUsername">  
+            </label>
+            <input type="submit" value="查詢" id="btn">
+        </form>
+        <h5 id="result"></h5>
+        <br>
+        <form action="/member/" method="POST">
+            <h2>更新我的姓名</h2>
+            <input type="text" name="updateName">
+            <button>更新</button>
+        </form>
+        <a href="/signout">登出系統</a>
+        
+    </div>
+    <div class="bye">
+        {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+                {% for message in messages %}  
+                    <p>{{ message }}</p>  
+                {% endfor %}  
+        {% endif %}  
+        {% endwith %}
+    </div>
+
+    <script>
+        let search = document.getElementById('searchUsername')
+        let btn = document.getElementById('btn')
+        let result =document.getElementById('result')
+        let searchResult = []
+        let api = '/api/users?username='
+        let connect = new XMLHttpRequest()
+        btn.addEventListener('click',(e)=>{
+            e.preventDefault()
+            connect.open("GET", api + search.value , true)
+            connect.onload = function(){
+            let data = JSON.parse(this.responseText);
+            if(data['data'] == null){
+                result.innerHTML = "查無此會員"
+            }else{
+                result.innerHTML = data['data']['name']
+            }   
+            }
+            connect.send()
+        })
+        
+            
+        
+
+    </script>
+</body>
+</html>
