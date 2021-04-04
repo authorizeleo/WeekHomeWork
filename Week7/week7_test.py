@@ -20,21 +20,7 @@ class User(db.Model):
     time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
 
-databases = User.query.all()
-words = []
-for data in databases:
-    word = {
-        "data":{
-            "id":data.id,
-            "name":data.name,
-            "username":data.username},
-    }
-    words.append(word)
-    
 
-nulluser = {
-    "data": None
-}
 
 
 @app.route('/',methods=['POST','GET'])
@@ -126,6 +112,20 @@ def loser():
 
 @app.route('/api/users')
 def api():
+    databases = User.query.all()
+    words = []
+    for data in databases:
+        word = {
+            "data":{
+                "id":data.id,
+                "name":data.name,
+                "username":data.username},
+        }
+        words.append(word)
+        
+    nulluser = {
+        "data": None
+    }
     if 'username' in request.args:
         username = request.args['username']
     else:
