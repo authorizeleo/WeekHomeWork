@@ -18,7 +18,7 @@ class User(db.Model):
     name = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(255), nullable=False , unique=True )
     password = db.Column(db.String(255), nullable=False)
-    time = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    time = db.Column(db.DateTime, default=datetime.now, nullable=False)
 
 
 
@@ -130,19 +130,20 @@ def api():
         flash('沒有登入唷')
         return redirect('/')
 
-@app.route('/api/user', methods=['POST',"GET"])
+@app.route('/api/user', methods=['POST'])
 def updatename():
     id = session.get('id')
     if id:
-        databases = User.query.filter_by(id=id).first()
-        updateName = request.json['name']
-        databases.name = updateName
-        db.session.commit()
-        session["name"] = updateName
-        return render_template('member.html')
+        if request.method == 'POST':
+            databases = User.query.filter_by(id=id).first()
+            updateName = request.json['name']
+            databases.name = updateName
+            db.session.commit()
+            session["name"] = updateName
+            print(2)
+            return redirect(url_for('member'))
     else:
         return redirect("/")
-
 
    
 
