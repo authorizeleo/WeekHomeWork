@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,19 +46,19 @@
     <div>
         <h2>恭喜{{data}}，成功登入系統</h2>
         <br/>
-        <form  >
+        <form>
             <h2>查詢會員姓名</h2>
             <label for="searchUsername">
-              <input type="text" name="searchUsername" id="searchUsername">  
+              <input type="text" name="searchUsername" id="searchUsername" placeholder="輸入帳號查詢姓名">  
             </label>
             <input type="submit" value="查詢" id="btn">
         </form>
         <h5 id="result"></h5>
         <br>
-        <form action="/member/" method="POST">
+        <form action="/member/" method="post" >
             <h2>更新我的姓名</h2>
-            <input type="text" name="updateName" placeholder="輸入新的姓名">
-            <button>更新</button>
+            <input type="text" name="updateName" placeholder="輸入新的姓名" id="updateName">
+            <button id="updateBtn">更新</button>
         </form>
         <a href="/signout">登出系統</a>
         
@@ -87,14 +88,27 @@
             if(data['data'] == null){
                 result.innerHTML = "查無此會員"
             }else{
-                result.innerHTML = data['data']['name']
+                result.innerHTML = `${data['data']['name']}  (${data['data']['username']})`
             }   
             }
             connect.send()
         })
         
+        let updateName = document.getElementById('updateName')
+        let updateBtn = document.getElementById('updateBtn')
+        let updateNameApi = '/api/user'
+        const config ={
+            headers:{ 'Content-Type': 'application/json'},
+        }
+        updateBtn.addEventListener('click',(e)=>{
+            e.preventDefault()
+            axios.post(updateNameApi,{name:updateName.value}, config)
+            .then((res)=>{ console.log({"ok":true})})
+            .catch((error)=>{console.log({"error":true})})
+        })
+
             
-        
+        updateName.value =""
 
     </script>
 </body>
