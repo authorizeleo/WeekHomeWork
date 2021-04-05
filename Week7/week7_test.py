@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlalchemy import desc
 
 
+
 app = Flask(__name__)
 app.secret_key = "123456"
 app.config.from_object('config')
@@ -75,10 +76,7 @@ def member():
     id = session.get('id')
     databases = User.query.filter_by(id=id).first()
     if id: 
-        if request.method == 'post':
-            return render_template("member.html" , data=databases.name)
-        else:
-            return render_template("member.html" , data=databases.name)
+        return render_template("member.html" , data=databases.name)
     else :
         flash("拜託你，可以好好登入嗎?")
         return redirect('/')
@@ -175,4 +173,3 @@ def add(user):
 if __name__ == "__main__":
     db.create_all()
     app.run(port=3000,debug=True)
-    
