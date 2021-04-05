@@ -88,8 +88,10 @@
             let data = JSON.parse(this.responseText);
             if(data['data'] == null){
                 result.textContent = "查無此會員"
+                search.value =""
             }else{
                 result.textContent = `${data['data']['name']}  (${data['data']['username']})`
+                search.value = ""
             }   
             }
             connect.send()
@@ -111,6 +113,7 @@
                     console.log(res)
                     updateResult.textContent ="更新成功"
                     successful.textContent = '恭喜'+updateName.value +"，成功登入系統"
+                    updateName.value =""
                 }
             })
             .catch((error)=>{
