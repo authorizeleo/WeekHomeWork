@@ -132,16 +132,24 @@ def api():
 
 @app.route('/api/user', methods=['POST'])
 def updatename():
+    test_ok = {
+        "ok":True
+    }
+    test_error = {
+        "error":True
+    }
     id = session.get('id')
     if id:
         if request.method == 'POST':
             databases = User.query.filter_by(id=id).first()
             updateName = request.json['name']
+            print(updateName)
             databases.name = updateName
             db.session.commit()
             session["name"] = updateName
-            print(2)
-            return render_template('member.html',data=updateName)
+            return jsonify(test_ok)
+        else:
+            return jsonify(test_error)
     else:
         return redirect("/")
 
