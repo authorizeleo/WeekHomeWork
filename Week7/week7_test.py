@@ -75,7 +75,10 @@ def member():
     id = session.get('id')
     databases = User.query.filter_by(id=id).first()
     if id: 
-        return render_template("member.html" , data=databases.name)
+        if request.method == 'post':
+            return render_template("member.html" , data=databases.name)
+        else:
+            return render_template("member.html" , data=databases.name)
     else :
         flash("拜託你，可以好好登入嗎?")
         return redirect('/')
@@ -139,14 +142,13 @@ def updatename():
         "error":True
     }
     id = session.get('id')
+    databases = User.query.filter_by(id=id).first()
     if id:
         if request.method == 'POST':
-            databases = User.query.filter_by(id=id).first()
-            updateName = request.json['name']
-            print(updateName)
-            databases.name = updateName
+            update = request.json["name"]
+            databases.name = update
             db.session.commit()
-            session["name"] = updateName
+            session["name"] = update
             return jsonify(test_ok)
         else:
             return jsonify(test_error)
