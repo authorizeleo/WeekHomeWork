@@ -44,7 +44,7 @@
         <h1>歡迎光臨，這是會員頁</h1>
     </div>
     <div>
-        <h2>恭喜{{data}}，成功登入系統</h2>
+        <h2 >恭喜{{data}}，成功登入系統</h2>
         <br/>
         <form>
             <h2>查詢會員姓名</h2>
@@ -55,11 +55,12 @@
         </form>
         <h5 id="result"></h5>
         <br>
-        <form  method="post" >
+        <form >
             <h2>更新我的姓名</h2>
-            <input type="text" name="updateName" placeholder="輸入新的姓名" id="updateName">
-            <button id="updateBtn" type="submit">更新</button>
+            <input type="text" name="updateName" placeholder="輸入新的姓名" id="update">
+            <input id="updateBtn" type="submit" value="更新">
         </form>
+        <h5 id="updateResult"></h5>
         <a href="/signout">登出系統</a>
         
     </div>
@@ -94,18 +95,29 @@
             connect.send()
         })
         
-        let updateName = document.getElementById('updateName')
+        let updateName = document.getElementById('update')
         let updateBtn = document.getElementById('updateBtn')
         let updateNameApi = '/api/user'
+        let updateResult = document.getElementById('updateResult')
+        let show = document.getElementById('show')
         const config ={
             headers:{ 'Content-Type': 'application/json'},
         }
         updateBtn.addEventListener('click',(e)=>{
             e.preventDefault()
             axios.post(updateNameApi,{name:updateName.value}, config)
-            .then((res)=>{ console.log({"ok":true})})
-            .catch((error)=>{console.log({"error":true})})
-            updateName.value =""
+            .then((res)=>{ 
+                console.log({"ok":true})
+                updateResult.innerHTML ="更新成功"
+                setTimeout(()=>{
+                    location.reload()
+                },3000)
+            })
+            .catch((error)=>{
+                console.log({"error":true})
+                updateResult.innerHTML ="更新失敗"
+            })
+            
         })
 
             
