@@ -141,7 +141,7 @@ def updatename():
             db.session.commit()
             session["name"] = updateName
             print(2)
-            return redirect(url_for('member'))
+            return render_template('member.html',data=updateName)
     else:
         return redirect("/")
 
