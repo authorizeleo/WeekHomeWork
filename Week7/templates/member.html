@@ -58,7 +58,7 @@
         <form action="/member/" method="post" >
             <h2>更新我的姓名</h2>
             <input type="text" name="updateName" placeholder="輸入新的姓名" id="updateName">
-            <button id="updateBtn">更新</button>
+            <button id="updateBtn" type="submit">更新</button>
         </form>
         <a href="/signout">登出系統</a>
         
@@ -105,10 +105,12 @@
             axios.post(updateNameApi,{name:updateName.value}, config)
             .then((res)=>{ console.log({"ok":true})})
             .catch((error)=>{console.log({"error":true})})
+            updateName.value =""
+            history.go(0)
         })
 
             
-        updateName.value =""
+        
 
     </script>
 </body>
