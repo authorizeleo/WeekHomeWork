@@ -44,7 +44,7 @@
         <h1>歡迎光臨，這是會員頁</h1>
     </div>
     <div>
-        <h2 >恭喜{{data}}，成功登入系統</h2>
+        <h2 id="successful">恭喜{{data}}，成功登入系統</h2>
         <br/>
         <form>
             <h2>查詢會員姓名</h2>
@@ -87,9 +87,9 @@
             connect.onload = function(){
             let data = JSON.parse(this.responseText);
             if(data['data'] == null){
-                result.innerHTML = "查無此會員"
+                result.textContent = "查無此會員"
             }else{
-                result.innerHTML = `${data['data']['name']}  (${data['data']['username']})`
+                result.textContent = `${data['data']['name']}  (${data['data']['username']})`
             }   
             }
             connect.send()
@@ -99,7 +99,7 @@
         let updateBtn = document.getElementById('updateBtn')
         let updateNameApi = '/api/user'
         let updateResult = document.getElementById('updateResult')
-        let show = document.getElementById('show')
+        let successful = document.getElementById('successful')
         const config ={
             headers:{ 'Content-Type': 'application/json'},
         }
@@ -109,15 +109,13 @@
             .then((res)=>{ 
                 if (res.data.ok == true){
                     console.log(res)
-                    updateResult.innerHTML ="更新成功"
+                    updateResult.textContent ="更新成功"
+                    successful.textContent = '恭喜'+updateName.value +"，成功登入系統"
                 }
-                setTimeout(()=>{
-                    location.reload()
-                },3000)
             })
             .catch((error)=>{
                 console.log(error.data.error)
-                updateResult.innerHTML ="更新失敗"
+                updateResult.textContent ="更新失敗"
             })
             
         })
