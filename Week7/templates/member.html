@@ -107,6 +107,10 @@
         }
         updateBtn.addEventListener('click',(e)=>{
             e.preventDefault()
+            if(updateName.value.trim() == "") {
+                updateResult.textContent ="更新失敗"
+                return
+            }
             axios.post(updateNameApi, {name:updateName.value}, config)
             .then((res)=>{ 
                 if (res.data.ok == true){
