@@ -78,6 +78,7 @@ def member():
                 return redirect('/member/')
             SearchupdateName = User.query.filter_by(id=id).first()
             SearchupdateName.name = updateName
+            session["name"] = SearchupdateName.name
             db.session.commit()
             flash('更新成功')
             return render_template("member.html" , data=updateName)
