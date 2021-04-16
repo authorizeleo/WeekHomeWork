@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歡迎光臨，這是會員頁</title>
+    <style>
+        .hello{
+            color: aliceblue;
+            margin-bottom: 20px;
+            background-color: darkblue;
+        }
+        div{
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+        a{
+            display: block
+        }
+        h2{
+            margin-bottom: 20px;
+        }
+        p{
+            display: flex;
+            justify-content: center;
+            color:red;
+            font-size: 40px;
+            margin-top: 50px;
+        }
+        .bye{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            color: red;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hello">
+        <h1>歡迎光臨，這是會員頁</h1>
+    </div>
+    <div>
+        <h2 id="successful">恭喜{{data}}，成功登入系統</h2>
+        <br/>
+        <form>
+            <h2>查詢會員姓名</h2>
+            <label for="searchUsername">
+              <input type="text" name="searchUsername" id="searchUsername" placeholder="輸入帳號查詢姓名">  
+            </label>
+            <input type="submit" value="查詢" id="btn">
+        </form>
+        <h5 id="result"></h5>
+        <br>
+        <form action='/member/' method="POST">
+            <h2>更新我的姓名</h2>
+            <input type="text" name="updateName" placeholder="輸入新的姓名" id="update">
+            <input id="updateBtn" type="submit" value="更新">
+        </form>
+        <h5 id="updateResult"></h5>
+        <a href="/signout">登出系統</a>
+        
+    </div>
+    <div class="bye">
+        {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+                {% for message in messages %}  
+                    <p>{{ message }}</p>  
+                {% endfor %}  
+        {% endif %}  
+        {% endwith %}
+    </div>
+
+    <script>
+        let search = document.getElementById('searchUsername')
+        let btn = document.getElementById('btn')
+        let result =document.getElementById('result')
+        let searchResult = []
+        let api = '/api/users?username='
+        let connect = new XMLHttpRequest()
+        btn.addEventListener('click',(e)=>{
+            e.preventDefault()
+            connect.open("GET", api + search.value , true)
+            connect.onload = function(){
+            let data = JSON.parse(this.responseText);
+            if(!search.value){
+                result.textContent = "請記得填入查詢帳號"
+                return
+            }
+            if(data['data'] == null){
+                result.textContent = "查無此會員"
+                search.value =""
+            }else{
+                result.textContent = `${data['data']['name']}  (${data['data']['username']})`
+                search.value = ""
+            }   
+            }
+            connect.send()
+        })
+        
+        let updateName = document.getElementById('update')
+        let updateBtn = document.getElementById('updateBtn')
+        let updateNameApi = '/api/user'
+        let updateResult = document.getElementById('updateResult')
+        let successful = document.getElementById('successful')
+        const config ={
+            headers:{ 'Content-Type': 'application/json'},
+        }
+        updateBtn.addEventListener('click',(e)=>{
+            e.preventDefault()
+            if(updateName.value.trim() == "") {
+                updateResult.textContent ="請記得填入資料"
+                return
+            }
+            if(updateName.value.split('').includes(" ")){
+                updateResult.textContent = '填入的資料中不能有空格'
+                return
+            }
+            axios.post(updateNameApi, {name:updateName.value}, config)
+            .then((res)=>{ 
+                if (res.data.ok == true){
+                    updateResult.textContent ="更新成功"
+                    successful.textContent = '恭喜'+ updateName.value +"，成功登入系統"
+                    updateName.value =""
+                }else{
+                    updateResult.textContent ="更新失敗"
+                    updateName.value =""
+                }
+            })
+            .catch((error)=>{
+                console.log(error)
+                updateResult.textContent ="更新失敗"
+            })
+            
+        })
+
+    </script>
+</body>
+</html>

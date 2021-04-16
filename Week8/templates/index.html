@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>第七周作業</title>
+    <style>
+        .hello{
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            background-color: darkblue;
+        }
+        h1{
+            color: #fff;
+            font-size: 40px;
+        }
+
+        .register{
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        label {
+            display: flex;
+            margin-top: 20px;
+        }
+        input{
+            margin-left: 20px;
+        }
+        .btn{
+            margin-left:40%;
+            margin-top:20px;
+        }
+        .bye{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            color: red;
+            font-size: 40px;
+        }
+        .login{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        h2{
+            text-align: center;
+        }
+        .tip{
+            color:red;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="hello">
+    <h1>
+        歡迎光臨，請註冊登入系統
+    </h1>
+</div>
+
+<div class="register">
+    <form action="/signup" method="POST">
+        <h3 class='tip' id="nameTip"></h3>
+        <label for="name">
+            姓名:<input type="text" name="name" id="name">
+        </label>
+        
+        <h3 class='tip' id="usernameTip"></h3>
+        <label for="username">
+            帳號:<input type="text" name="username" id="username">
+        </label>
+        
+        <h3 class='tip' id="registerPasswordTip"></h3>
+        <label for="registerPassword">
+            密碼:<input type="password" name="registerPassword" id="registerPassword">
+        </label>
+        <input class="btn" type="submit" value="註冊" id='registerBtn'>
+        <h3 class='tip' id="registerTip"></h3>
+    </form>
+</div>
+
+<div class="login">
+    <form action="/signin" method="POST">
+        <h2>登入系統</h2>
+        <label for="AccountNumber">
+            帳號:<input type="text" name="AccountNumber" id="AccountNumber">
+        </label>
+        <label for="password">
+            密碼:<input type="password" name="password" id="password">
+        </label>
+        <input class="btn" type="submit" value="登入" id="loginBtn">
+    </form>
+</div>
+<h3 class='tip' id="loginTip"></h3>
+<div class="bye">
+{% with messages = get_flashed_messages() %}  
+{% if messages %}  
+        {% for message in messages %}  
+            <p>{{ message }}</p>  
+        {% endfor %}  
+{% endif %}  
+{% endwith %}
+</div>
+<script>
+    // register  auth
+    const name = document.getElementById('name')
+    const nameTip = document.getElementById('nameTip')
+    const username = document.getElementById('username')
+    const usernameTip = document.getElementById('usernameTip')
+    const registerPassword = document.getElementById('registerPassword')
+    const registerPasswordTip = document.getElementById('registerPasswordTip')
+    const registerBtn = document.getElementById('registerBtn')
+    const registerTip = document.getElementById('registerTip')
+    const testNumber = /[0-9]/
+    const testUsername = /[a-zA-Z]|[0-9]/
+    const UsaChina = /[\u4e00-\u9fa5][a-zA-Z]{1}|[a-zA-Z][\u4e00-\u9fa5]{1}/
+    let nameStatus = false
+    let usernameStatus = false
+    let passwordStatus = false
+    
+    name.addEventListener('keyup', (e)=>{
+        registerTip.textContent = ""
+        let newName = name.value.trim()
+        
+        if (testNumber.test(newName)){
+            nameTip.textContent ='名字不可以有數字'
+            return nameStatus = false
+        }
+
+        if(!newName){
+            nameTip.textContent ='名字資料不得為空🐽'
+            return nameStatus = false
+        }
+
+        if(newName.length < 2 || newName.length > 10){
+            nameTip.textContent ='名字長度請介於2~10字元🐗'
+            return nameStatus = false
+        }    
+
+        if (UsaChina.test(newName)){
+            nameTip.textContent = '名字不要中英文混打🐅'
+            return nameStatus = false
+        }
+
+        if (name.value.split("").includes(' ')){
+            nameTip.textContent = '名字輸入中不能有空值🦁'
+            return nameStatus = false
+        }
+
+        nameTip.textContent = '正確格式🦝'
+        return nameStatus = true
+    })
+
+    username.addEventListener('keyup',()=>{
+        registerTip.textContent = ""
+        let newUsername = username.value.trim()
+        const ajax = new Promise((resolve, reject)=>{
+            let req = new XMLHttpRequest();
+            let api = "/api/users?username=" + username.value
+            req.open("get", api)
+            req.onload = function(){
+                let data = JSON.parse(this.responseText)
+                resolve(data.data);
+            }
+            req.onerror = function(){reject("Error")}
+            req.send()
+        })
+
+        ajax
+        .then((result) => {
+            if(result){
+                usernameTip.textContent = '此帳號已有註冊'
+                return usernameStatus = false
+            }
+        })
+        .catch((error) => { console.log( error ) })
+
+        if(!newUsername){
+            usernameTip.textContent = '帳號不得為空'
+            return usernameStatus = false 
+        }
+
+        if (username.value.split("").includes(' ')){
+            usernameTip.textContent = '帳號輸入中不能有空值🦁'
+            return usernameStatus = false
+        }
+
+        if (username.value.length < 6  || username.value.length > 12){
+            usernameTip.textContent = '帳號長度請介於6字元~12字元'
+            return usernameStatus = false
+        }
+
+        if (testUsername.test(newUsername)){
+            usernameTip.textContent ='正確格式'
+            return usernameStatus = true
+        }else{
+            usernameTip.textContent ='不要輸入中文字元'
+            return usernameStatus = false
+        }
+
+
+    })
+
+    registerPassword.addEventListener('keyup',()=>{
+        registerTip.textContent = ""
+        let newPassword = registerPassword.value.trim()
+        if(!newPassword){
+            registerPasswordTip.textContent = '密碼不得為空'
+            return passwordStatus = false 
+        }
+
+        if (registerPassword.value.split("").includes(' ')){
+            registerPasswordTip.textContent = '密碼輸入中不能有空值🦁'
+            return passwordStatus = false
+        }
+
+        if (testUsername.test(registerPassword.value)){
+            registerPasswordTip.textContent ='♥符合格式'
+            return passwordStatus = true
+        }else{
+            registerPasswordTip.textContent = '輸入格式有誤'
+            return passwordStatus = false
+        }
+
+
+    })
+
+    registerBtn.addEventListener('click',(e) => {
+        if(!passwordStatus || !usernameStatus || !nameStatus) {
+            e.preventDefault()
+            registerTip.textContent = '所有資料必須符合網站註冊條件'
+            return 
+        }
+
+    })
+
+
+    // login
+
+    let loginUsername = document.getElementById('AccountNumber')
+    let loginPassword = document.getElementById('password')
+    let loginBtn = document.getElementById('loginBtn')
+    let loginTip = document.getElementById('loginTip')
+    
+    loginUsername.addEventListener('keydown', ()=>{
+        loginTip.textContent = ""
+    })
+
+    loginPassword.addEventListener('keydown', ()=>{
+        loginTip.textContent = ""
+    })
+
+
+    loginBtn.addEventListener('click', (e) => {
+       if(!loginUsername.value || !loginPassword.value){
+            e.preventDefault()
+           loginTip.textContent = '請記得輸入帳號密碼'
+           return
+       }
+    })
+
+
+
+</script>
+</body>
+</html>
