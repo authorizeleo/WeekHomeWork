@@ -16,8 +16,8 @@ app.config["JSON_AS_ASCII"] = False
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.BigInteger, primary_key=True , autoincrement=True)  
-    name = db.Column(db.String(255), nullable=False, index=True)
-    username = db.Column(db.String(255), nullable=False , unique=True )
+    name = db.Column(db.String(255), nullable=False)
+    username = db.Column(db.String(255), nullable=False , unique=True, index=True )
     password = db.Column(db.String(255), nullable=False)
     time = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
